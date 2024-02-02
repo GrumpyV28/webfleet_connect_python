@@ -23,3 +23,15 @@ class WebfleetConnectResponse():
     if is_json:
       return JsonResponseParser()
     return CsvResponseParser()
+  
+  def to_excel(self,filename='output.xlsx'):
+    workbook =workbook()
+    sheet = workbook.active
+    
+    data = self._parser.to_hash(self._response)
+    
+    headers = list (data.keys())
+    sheet.append(headers)
+    row_data = [data[headers] for header in headers]
+    sheet.append(row_data)
+    workbook.save(filename)
