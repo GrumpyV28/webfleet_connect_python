@@ -25,16 +25,22 @@ class WebfleetConnectResponse():
     return CsvResponseParser()
   
   def to_excel(self, filename='output.xlsx'):
-        workbook = Workbook()
-        sheet = workbook.active
+    workbook = Workbook()
+    sheet = workbook.active
 
-        data = self._parser.to_hash(self._response)
+    data = self._parser.to_hash(self._response)
 
-        headers = list(data.keys())
-        sheet.append(headers)
-        row_data = [data[header] for header in headers]
-        sheet.append(row_data)
-        workbook.save(filename)
+    headers = list(data.keys())
+    sheet.append(headers)
+    row_data = [data[header] for header in headers]
+    sheet.append(row_data)
+    
+    print(f"Chemin du fichier avant enregistrement : {os.path.abspath(filename)}")
+    
+    workbook.save(filename)
+    
+    print(f"Chemin du fichier après enregistrement : {os.path.abspath(filename)}")
+
         
 webfleet_response = WebfleetConnectResponse()
-webfleet_response.to_excel('nom_du_fichier.xlsx')
+webfleet_response.to_excel('output.xlsx')
