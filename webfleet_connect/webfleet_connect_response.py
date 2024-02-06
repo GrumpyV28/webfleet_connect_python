@@ -36,4 +36,5 @@ class WebfleetConnectResponse():
         sheet.append(row_data)
         workbook.save(filename)
         
+webfleet_response = WebfleetConnectResponse()
 webfleet_response.to_excel('nom_du_fichier.xlsx')
